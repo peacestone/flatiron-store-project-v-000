@@ -3,4 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :carts
+
+  def current_cart
+      @cart = carts.where(status: nil).take
+  end
+
+  def current_cart=(cart)
+    @cart = cart
+  end
+
 end
