@@ -4,7 +4,7 @@ class LineItemsController < ApplicationController
     #binding.pry
 
     if current_cart
-      current_cart.add_item(params[:id])
+      current_cart.add_item(params[:item_id])
       current_cart.save
     else
       current_user.create_current_cart.add_item(params[:item_id])

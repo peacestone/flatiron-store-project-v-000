@@ -1,3 +1,6 @@
 <% @categories.each do |category| %>
-  <%= @category.title %>
+  <%= category.title %>
+  <% category.items.each do |item| %>
+    <%= number_to_currency(item.price.to_f/100) %>
+  <% end %>
 <% end %>

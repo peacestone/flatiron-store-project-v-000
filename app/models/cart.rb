@@ -4,6 +4,7 @@ class Cart < ActiveRecord::Base
   belongs_to :user
 
   def add_item(item_id)
+
     line_item = line_items.find_or_initialize_by(item_id: item_id)
     #binding.pry
     line_item.update(quantity: line_item.quantity + 1) if line_item.persisted?
@@ -11,7 +12,12 @@ class Cart < ActiveRecord::Base
   end
 
   def total
-    items.sum("price")
+    total = 0
+    #binding.pry
+    line_items.each do |line_item|
+      total += line_item.item.price * line_item.quantity
+    end
+    total
   end
 
 
